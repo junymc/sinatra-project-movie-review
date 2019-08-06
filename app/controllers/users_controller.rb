@@ -1,3 +1,7 @@
 class UsersController < ApplicationController
-  has_secure_password
+ 
+    get '/signup' do
+      erb :'users/signup'
+    end
+
 end
