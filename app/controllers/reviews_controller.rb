@@ -5,4 +5,18 @@ class ReviewsController < ApplicationController
         erb :'reviews/new'
     end
 
+    post '/reviews' do
+
+        redirect '/movies'
+    end
+
+    get '/reviews/:id' do
+         
+    end
+
+    get 'reviews/:id/edit' do
+        
+    end
+
+
 end

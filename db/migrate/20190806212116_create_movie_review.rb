@@ -1,6 +1,6 @@
 class CreateMovieReview < ActiveRecord::Migration
   def change
-    create_table :movie_review do |t|
+    create_table :movie_reviews do |t|
       t.string :content
       t.integer :rate
       t.integer :user_id

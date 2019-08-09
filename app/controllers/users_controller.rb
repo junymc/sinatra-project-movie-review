@@ -2,33 +2,34 @@ class UsersController < ApplicationController
   
  
     get '/signup' do
+      redirect '/home' if logged_in?
       erb :'users/signup'
     end
 
     post '/signup' do
       user = User.new(:username => params[:username], :password => params[:password])
-      session[:user_id] = user.id
       if user.save
+        session[:user_id] = user.id
         redirect "/home"
       else
-        "Oop! Something went wrong. Try again!"
         erb :'users/signup'
       end
     end
 
     get '/login' do
+      redirect '/home' if logged_in?
+      @failed = false
       erb :'users/login'
     end
 
     post '/login' do
 
       user = User.find_by(:username => params[:username])
-      # binding.pry
-      if user && user.authenticate(params[:password])
+      if !!user && user.authenticate(params[:password])
         session[:user_id] = user.id
         redirect "/home"
       else
-        "Oop! Something went wrong. Try again!"
+        @failed = true
         erb :'users/login'
       end
     end

@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20190806212116) do
 
-  create_table "movie_review", force: :cascade do |t|
+  create_table "movie_reviews", force: :cascade do |t|
     t.string   "content"
     t.integer  "rate"
     t.integer  "user_id"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20190806212116) do
 
   create_table "movies", force: :cascade do |t|
     t.string "name"
-    t.string "ganre"
   end
 
   create_table "users", force: :cascade do |t|

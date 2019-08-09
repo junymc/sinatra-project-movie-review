@@ -1,3 +1,5 @@
+
+
 html{
     background-color: #f8ecf3;
     
@@ -12,4 +14,8 @@ h1{
 .boxed{
     border: 2px solid rgb(148, 4, 93);
     border-radius: 5px;
+}
+
+.danger{
+    color: red;
 }
