@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
 
     end
 
-    patch '/reviews/:id'
+    # patch '/reviews/:id'
 
 
 end
