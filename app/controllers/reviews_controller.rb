@@ -15,8 +15,10 @@ class ReviewsController < ApplicationController
     end
 
     get 'reviews/:id/edit' do
-        
+
     end
+
+    patch '/reviews/:id'
 
 
 end

@@ -7,9 +7,9 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-      user = User.new(:username => params[:username], :password => params[:password])
-      if user.save
-        session[:user_id] = user.id
+      @user = User.new(:username => params[:username], :password => params[:password])
+      if @user.save
+        session[:user_id] = @user.id
         redirect "/home"
       else
         erb :'users/signup'
@@ -38,9 +38,10 @@ class UsersController < ApplicationController
         erb :'users/home'
     end
 
-  
-
-
+    delete '/logout' do
+      session.clear
+      redirect '/login'
+    end
 
 
 end

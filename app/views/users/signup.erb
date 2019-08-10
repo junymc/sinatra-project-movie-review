@@ -2,7 +2,14 @@
 <form action="/signup" method="POST">
 <P>Please sing up to check out movies and write your reviews.</p>
 <br>
+
     <input type="text" name="username" placeholder="Username:">
     <input type="password" name="password" placeholder="Password:">
     <input type="submit" value="Sign Up">
 </form>
+
+<% if @user && @user.errors.any? %>
+   <% @user.errors.full_messages.each do |e| %>
+    <p class="danger"><%= e %></p>
+   <% end %>
+<% end %>

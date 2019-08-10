@@ -13,8 +13,19 @@
     <h1 class="boxed">MOVIEVIEW</h1>
    
     <br>
-    <%= yield %>
 
+    <%= yield %>
+    
+    <br>
+    
+    <% if logged_in? %>
+       <a href="/home">Home</a>  <a href="/movies">Movies</a>
+         <form action="/logout" method="POST">
+             <input type="hidden" name="_method" value="delete">
+             <input type="submit" value="Log Out">
+         </form>
+
+    
     
 </body>
 </html>
