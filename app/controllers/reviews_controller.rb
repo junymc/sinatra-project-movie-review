@@ -6,12 +6,13 @@ class ReviewsController < ApplicationController
     end
 
     post '/reviews' do
-
+   # after user submit the new review, it should go to '/movies' page again but not working..
         redirect '/movies'
     end
 
     get '/reviews/:id' do
-         
+         @reviews = MovieReview.all
+        erb :'reviews/show' 
     end
 
     get 'reviews/:id/edit' do

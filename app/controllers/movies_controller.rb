@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
     end
 
     get '/movies/:id' do
-
+        @movies = Movie.all
         erb :'movies/show'
     end
 
