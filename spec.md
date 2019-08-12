@@ -12,6 +12,9 @@ Specs:
 [] Ensure that users can edit and delete only their own resources - not resources created by other users.
 [] Validate user input so bad data cannot be persisted to the database.
 [x] BONUS: Display validation failures to user with error messages. (This is an optional feature, challenge yourself and give it a shot!)
+[] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+[] **** Your app does NOT break if I go to unexpected URLs. Show a 404 or 401 page!! *****
+
 
 
 Confirm

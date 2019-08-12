@@ -3,5 +3,5 @@ class User < ActiveRecord::Base
     has_many :movie_reviews
     has_many :movies, through: :movie_reviews
     validates :username, presence: true, uniqueness: true
-    validates :password, length: {in: 6..10}
+    validates :password, length: {in: 6..10}, unless: ->(u){ u.password.blank? }
 end

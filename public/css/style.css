@@ -19,3 +19,15 @@ h1{
 .danger{
     color: red;
 }
+
+.review{
+    background-color: rgb(250, 239, 253);
+    border: 2px dotted pink;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
+
+form input{
+    margin: auto;
+}

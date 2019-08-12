@@ -4,19 +4,22 @@ class ReviewsController < ApplicationController
         
         erb :'reviews/new'
     end
-
+  
     post '/reviews' do
-   # after user submit the new review, it should go to '/movies' page again but not working..
-        redirect '/movies'
+       
+        @review = MovieReview.create(rate: params[:rate], review: params[:content])     
+        redirect '/movies/:id'
     end
 
-    get '/reviews/:id' do
-         @reviews = MovieReview.all
-        erb :'reviews/show' 
-    end
+    # get '/reviews/:id' do
+    #     @reviews = MovieReview.all
+    #     @review = MovieReview.find(params[:id])
+    #     erb :'reviews/show' 
+    # end
 
     get 'reviews/:id/edit' do
-
+        @review = MovieReview.find(params[:id])
+        erb :'/reviews/edit'
     end
 
     # patch '/reviews/:id'

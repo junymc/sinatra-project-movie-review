@@ -1,3 +1,20 @@
-<% @movies.each do |movie| %>
-   Movie Name :<%= movie.name %>
-   Rate : 
+
+<% @movie.id %>
+   <h2>Movie Name : <%= @movie.name %></h2>
+   <br>
+   <% @movie.movie_reviews.each do |review| %>
+      <div class="review"> 
+        <p>Username : <%= review.user.username %></p> 
+        <p>Rate : <%= review.rate %></p>
+        <p>Review : <%= review.content %></p>
+        <% if review.user == current_user %>
+          <a href="/reviews/<%= review.id %>/edit">Edit</a>
+          <br><br>
+          <form action="/reviews/<%= review.id %>" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <input type="submit" value="Delete">
+          </form>
+          <% end %>
+      </div>
+   <% end %>
+   <br>

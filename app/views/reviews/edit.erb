@@ -1,0 +1,6 @@
+<form method="POST" action="reviews/<%= @review.id %>">
+<input id="hidden" type="hidden" name="_method" value="patch">
+Username :<input type="text" id="username" name="username" value="<%= @review.username %>">
+Review :<input type="text" id="review" name="review" value="<%= @review %>">
+<input type="submit" value="Submit">
+</form>
