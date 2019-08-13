@@ -1,7 +1,7 @@
 <% @reviews.each do |review| %>
     <%= if review.id %>
-    Rate :<%= review.rate %>
-    Review :<%= review.content %>
+    Rate : <%= review.rate %>
+    Review : <%= review.content %>
       <% if review.user == current_user %>
           <a href="/reviews/<%= review.id %>/edit">Edit</a>
           <form action="/reviews/<%= review.id %>" method="post">

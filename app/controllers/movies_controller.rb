@@ -10,8 +10,12 @@ class MoviesController < ApplicationController
     end
 
     get '/movies/:id' do
-        @movie = Movie.find(params[:id])
-        erb :'movies/show'
+        @movie = Movie.find_by(id: params[:id])
+        if @movie
+            erb :'movies/show'
+        else
+            erb :'error'
+        end    
     end
 
 end

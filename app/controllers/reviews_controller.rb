@@ -5,24 +5,26 @@ class ReviewsController < ApplicationController
         erb :'reviews/new'
     end
   
-    post '/reviews' do
-       
-        @review = MovieReview.create(rate: params[:rate], review: params[:content])     
+    post '/review' do
+        @review = MovieReview.create(rate: params["rate"], content: params["review"]) 
+        
         redirect '/movies/:id'
     end
 
-    # get '/reviews/:id' do
-    #     @reviews = MovieReview.all
-    #     @review = MovieReview.find(params[:id])
-    #     erb :'reviews/show' 
-    # end
 
-    get 'reviews/:id/edit' do
-        @review = MovieReview.find(params[:id])
-        erb :'/reviews/edit'
+    get '/reviews/:id/edit' do
+        @review = MovieReview.find_by(id: params[:id])
+        erb :'reviews/edit'
     end
 
-    # patch '/reviews/:id'
+    patch '/reviews/:id' do
+    end
+
+    delete '/reviews/:id' do
+        @review = MovieReview.find_by(id: params[:id])
+        @review.destroy
+        redirect '/reviews'
+    end
 
 
 end
