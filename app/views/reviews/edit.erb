@@ -8,7 +8,7 @@ Review :<textarea name="review" id="review" cols="30" rows="5" value="<%= @revie
           4<input type="radio" name="rate" value="4">
           5<input type="radio" name="rate" value="5">
 <br>
-<p><input type="submit" value="Update"></p>
+<p><input type="submit" value="Update">
 </form>
 
 <form action="/reviews/<%= @review.id %>" method="post">
@@ -18,4 +18,3 @@ Review :<textarea name="review" id="review" cols="30" rows="5" value="<%= @revie
 </form>
 <br>
 <a href="/home">Back to Home</a>
-<br>

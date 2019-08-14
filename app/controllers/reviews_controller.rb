@@ -5,10 +5,18 @@ class ReviewsController < ApplicationController
         erb :'reviews/new'
     end
   
-    post '/review' do
-        @review = MovieReview.create(rate: params["rate"], content: params["review"]) 
-        
-        redirect '/movies/:id'
+    post '/reviews' do
+        @movie = Movie.find_or_create_by(name: params[:movie_name].capitalize)
+        @review = MovieReview.create(user: current_user, rate: params["rate"], content: params["review"], movie: @movie)
+        # binding.pry
+        redirect '/reviews'
+    end
+
+    get '/reviews' do
+        # binding.pry
+        @reviews = current_user.movie_reviews
+       
+        erb :'reviews/index'
     end
 
 
@@ -18,11 +26,19 @@ class ReviewsController < ApplicationController
     end
 
     patch '/reviews/:id' do
+        # @reviews = MovieReview.all
+        @review = MovieReview.find_by(id: params[:id])
+        @review.update(rate: params["rate"], content: params["review"])
+        @review.save
+        redirect '/reviews'
     end
 
     delete '/reviews/:id' do
+        # @reviews = MovieReview.all
         @review = MovieReview.find_by(id: params[:id])
-        @review.destroy
+        if @review.present?
+            @review.destroy
+        end
         redirect '/reviews'
     end
 
