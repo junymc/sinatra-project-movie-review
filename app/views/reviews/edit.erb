@@ -1,3 +1,8 @@
+<h2>Write your review</h2>
+<% if !!@message %>
+   <p class="danger"><%= @message %></p>
+<% end %>
+
 <form action="/reviews/<%= @review.id %>" method="post">
 <input id="hidden" type="hidden" name="_method" value="patch">
 Review :<textarea name="review" id="review" cols="30" rows="5" value="<%= @review.content %>"></textarea> 
@@ -8,7 +13,7 @@ Review :<textarea name="review" id="review" cols="30" rows="5" value="<%= @revie
           4<input type="radio" name="rate" value="4">
           5<input type="radio" name="rate" value="5">
 <br>
-<p><input type="submit" value="Update">
+<p><input type="submit" value="Update"></p>
 </form>
 
 <form action="/reviews/<%= @review.id %>" method="post">

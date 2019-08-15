@@ -1,19 +1,24 @@
 class ReviewsController < ApplicationController
 
     get '/reviews/new' do
-        
+        authorize
         erb :'reviews/new'
     end
   
     post '/reviews' do
+        authorize
         @movie = Movie.find_or_create_by(name: params[:movie_name].capitalize)
         @review = MovieReview.create(user: current_user, rate: params["rate"], content: params["review"], movie: @movie)
-        # binding.pry
-        redirect '/reviews'
+        if @review
+            redirect '/reviews'
+        else
+            @message = "Ooops, something went wrong, try again."
+            erb :'reviews/new'
+        end
     end
 
     get '/reviews' do
-        # binding.pry
+        redirect '/login' if !logged_in?
         @reviews = current_user.movie_reviews
        
         erb :'reviews/index'
@@ -21,20 +26,25 @@ class ReviewsController < ApplicationController
 
 
     get '/reviews/:id/edit' do
+        authorize
         @review = MovieReview.find_by(id: params[:id])
-        erb :'reviews/edit'
+        if @review
+            erb :'reviews/edit'
+        else
+            erb :error
+        end
     end
 
     patch '/reviews/:id' do
-        # @reviews = MovieReview.all
+        authorize
         @review = MovieReview.find_by(id: params[:id])
         @review.update(rate: params["rate"], content: params["review"])
-        @review.save
+        
         redirect '/reviews'
     end
 
     delete '/reviews/:id' do
-        # @reviews = MovieReview.all
+        authorize
         @review = MovieReview.find_by(id: params[:id])
         if @review.present?
             @review.destroy

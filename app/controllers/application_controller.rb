@@ -16,12 +16,24 @@ class ApplicationController < Sinatra::Base
 
 		def current_user
 			User.find_by(id: session[:user_id])
-		end
+        end
+
+        def authorize
+            if !logged_in? || current_user.nil?
+                redirect '/login'
+            end
+        end
+
 	end
 
-    get "/" do
+    get '/' do
         erb :index
-  end
-  
+    end
+
+    not_found do
+        @msg = "This resource was not found."
+        status 404
+        erb :error
+    end
 
 end
