@@ -24,6 +24,10 @@ class ApplicationController < Sinatra::Base
             end
         end
 
+        def clean(text)
+            Rack::Utils.escape_html(text)
+        end
+
 	end
 
     get '/' do

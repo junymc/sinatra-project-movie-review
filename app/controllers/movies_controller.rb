@@ -10,6 +10,7 @@ class MoviesController < ApplicationController
     end
 
     get '/movies/:id' do
+        authorize
         @movie = Movie.find_by(id: params[:id])
         if @movie
             erb :'movies/show'

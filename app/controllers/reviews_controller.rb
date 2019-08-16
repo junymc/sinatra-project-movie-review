@@ -7,17 +7,19 @@ class ReviewsController < ApplicationController
   
     post '/reviews' do
         authorize
-        @movie = Movie.find_or_create_by(name: params[:movie_name].capitalize)
-        @review = MovieReview.create(user: current_user, rate: params["rate"], content: params["review"], movie: @movie)
-        if @review
+        @movie = Movie.find_or_create_by(name: clean(params[:movie_name].capitalize))
+        @review = MovieReview.create(user: current_user, rate: params["rate"], content: clean(params["review"]), movie: @movie)
+        
+        if !@review.errors.any?
             redirect '/reviews'
         else
-            @message = "Ooops, something went wrong, try again."
+            
             erb :'reviews/new'
         end
     end
 
     get '/reviews' do
+        authorize
         redirect '/login' if !logged_in?
         @reviews = current_user.movie_reviews
        
@@ -38,9 +40,12 @@ class ReviewsController < ApplicationController
     patch '/reviews/:id' do
         authorize
         @review = MovieReview.find_by(id: params[:id])
-        @review.update(rate: params["rate"], content: params["review"])
-        
-        redirect '/reviews'
+        @review.update(rate: params["rate"], content: clean(params["review"]))
+        if !@review.errors.any?
+            redirect '/reviews'
+        else
+            erb :'reviews/edit'
+        end
     end
 
     delete '/reviews/:id' do

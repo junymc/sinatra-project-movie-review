@@ -1,6 +1,8 @@
 <h2>Write your review</h2>
-<% if !!@message %>
-   <p class="danger"><%= @message %></p>
+<% if @review && @review.errors.any? %>
+   <% @review.errors.full_messages.each do |e| %>
+    <p class="danger"><%= e %></p>
+   <% end %>
 <% end %>
 
 <form method="post" action="/reviews">

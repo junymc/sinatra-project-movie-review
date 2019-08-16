@@ -1,17 +1,19 @@
 <h2>Write your review</h2>
-<% if !!@message %>
-   <p class="danger"><%= @message %></p>
+<% if @review && @review.errors.any? %>
+   <% @review.errors.full_messages.each do |e| %>
+    <p class="danger"><%= e %></p>
+   <% end %>
 <% end %>
 
 <form action="/reviews/<%= @review.id %>" method="post">
 <input id="hidden" type="hidden" name="_method" value="patch">
-Review :<textarea name="review" id="review" cols="30" rows="5" value="<%= @review.content %>"></textarea> 
+Review :<textarea name="review" id="review" cols="30" rows="5" ><%= @review.content %></textarea> 
 <br><br>
-   Rate : 1<input type="radio" name="rate" value="1">
-          2<input type="radio" name="rate" value="2">
-          3<input type="radio" name="rate" value="3">
-          4<input type="radio" name="rate" value="4">
-          5<input type="radio" name="rate" value="5">
+   Rate : 1<input type="radio" name="rate" value="1" <%= "checked='checked'" if @review.rate == 1 %>>
+          2<input type="radio" name="rate" value="2" <%= "checked='checked'" if @review.rate == 2 %>>
+          3<input type="radio" name="rate" value="3" <%= "checked='checked'" if @review.rate == 3 %>>
+          4<input type="radio" name="rate" value="4" <%= "checked='checked'" if @review.rate == 4 %>>
+          5<input type="radio" name="rate" value="5" <%= "checked='checked'" if @review.rate == 5 %>>
 <br>
 <p><input type="submit" value="Update"></p>
 </form>
