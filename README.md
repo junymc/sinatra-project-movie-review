@@ -18,35 +18,16 @@
 
  ## Instructions
 
- You will need to have these gems in your `Gemfile`.
+ Go to the GitHub page and click the "Fork" button. Once you've done that, you can clone your repo with the command line:
 
  ```
-source 'http://rubygems.org'
-
-gem 'sinatra'
-gem 'activerecord', '~> 4.2', '>= 4.2.6', :require => 'active_record'
-gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
-gem 'rake'
-gem 'require_all'
-gem 'sqlite3', '~> 1.3.6'
-gem 'thin'
-gem 'shotgun'
-gem 'pry'
-gem 'bcrypt'
-gem 'tux'
-
-group :test do
-  gem 'rspec'
-  gem 'capybara'
-  gem 'rack-test'
-  gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
-end
+  # Clone your fork to your local machine
+  git clone git@github.com:USERNAME/FORKED-PROJECT.git
 
 ```
-
-After add these in the `Genfile`, do `bundle install` to install all the required gems.
+ After clone the repo, install all the required gems with `bundler install`. If you want to see how your application looks like, you can run it locally with `shotgun`.
 
 ## Contributing
 
-This project is open source under the MIT license, which means you have full access to the source code and can modify it to fit your own needs.
+ This project is open source under the MIT license, which means you have full access to the source code and can modify it to fit your own needs.
  
