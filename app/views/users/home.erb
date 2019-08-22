@@ -1,3 +1,9 @@
+<% if @movie && @movie.errors.any? %>
+   <% @movie.errors.full_messages.each do |e| %>
+    <p class="danger"><%= e %></p>
+   <% end %>
+<% end %>
+
 <h2>Hello! <%= current_user.username %></h2>
 <br>
 
@@ -7,4 +13,9 @@
 <h3>Would you like to write a review?</h3>
  <a href="/reviews/new">Writing A Review</a>
 <br><br>
+<h3>Search for the movie that you like to see the reviews.</h3>
+<form action="/search" method="post">
+  <input type="text" name="movie_name" >
+  <input type="submit" value="Search">
+</form>
 

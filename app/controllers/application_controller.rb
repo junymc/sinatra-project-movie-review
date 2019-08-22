@@ -34,6 +34,11 @@ class ApplicationController < Sinatra::Base
         erb :index
     end
 
+    get '/home' do
+        authorize
+        erb :'users/home'
+    end
+
     not_found do
         @msg = "This resource was not found."
         status 404
