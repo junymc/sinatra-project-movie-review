@@ -18,7 +18,7 @@ class ApplicationController < Sinatra::Base
 			User.find_by(id: session[:user_id])
         end
 
-        def authorize
+        def authenticate
             if !logged_in? || current_user.nil?
                 redirect '/login'
             end
@@ -36,7 +36,7 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/home' do
-        authorize
+        authenticate
         erb :'users/home'
     end
 

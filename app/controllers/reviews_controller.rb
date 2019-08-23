@@ -1,12 +1,12 @@
 class ReviewsController < ApplicationController
 
     get '/reviews/new' do
-        authorize
+        authenticate
         erb :'reviews/new'
     end
   
     post '/reviews' do
-        authorize
+        authenticate
         @movie = Movie.find_or_create_by(name: clean(params[:movie_name].capitalize))
         @review = MovieReview.create(user: current_user, rate: params["rate"], content: clean(params["review"]), movie: @movie)
         
@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
     end
 
     get '/reviews' do
-        authorize
+        authenticate
         redirect '/login' if !logged_in?
         @reviews = current_user.movie_reviews
        
@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
 
 
     get '/reviews/:id/edit' do
-        authorize
+        authenticate
         @review = MovieReview.find_by(id: params[:id])
         if @review
             erb :'reviews/edit'
@@ -38,9 +38,11 @@ class ReviewsController < ApplicationController
     end
 
     patch '/reviews/:id' do
-        authorize
+        authenticate
         @review = MovieReview.find_by(id: params[:id])
+        redirect '/access_denied' if @review.user_id != current_user
         @review.update(rate: params["rate"], content: clean(params["review"]))
+        #Micah's @review.id was 19
         if !@review.errors.any?
             redirect '/reviews'
         else
@@ -48,14 +50,19 @@ class ReviewsController < ApplicationController
         end
     end
 
+    # get '/access_denied'
+    #     @messgae = "You don't have access to this review!"
+    #      erb :'users/home'
+    # end
+
     delete '/reviews/:id' do
-        authorize
+        authenticate
         @review = MovieReview.find_by(id: params[:id])
+        redirect '/access_denied' if @review.user_id != current_user
         if @review.present?
             @review.destroy
         end
         redirect '/reviews'
     end
-
 
 end

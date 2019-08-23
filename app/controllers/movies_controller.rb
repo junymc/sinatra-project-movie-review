@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
     end
 
     get '/movies/:id' do
-        authorize
+        authenticate
         @movie = Movie.find_by(id: params[:id])
         if @movie
             erb :'movies/show'
@@ -20,27 +20,25 @@ class MoviesController < ApplicationController
     end
 
     post '/search' do
-        authorize
-       
-        @movie = Movie.find(name: clean(params[:movie_name].capitalize))
-        if !@movie.errors.any?
-            redirect '/search'
+        authenticate
+        @movie = Movie.find_by(name: clean(params[:movie_name].capitalize))
+        if @movie
+            redirect "/movies/#{@movie.id}"          
         else
-            erb :'users/home'
+            
+            erb :'users/home'         
         end
     end
 
-    get '/search' do
-        authorize
-        
-        @movie = Movie.find_by(name: params[:movie_name])
-        if @movie
-            erb :'movies/show'
-           
-        else
-            @message = "Sorry, that movie can not be found."
-            redirect '/home'
-        end
-    end
+    # get '/movie' do
+    #     authenticate
+    #     @movie = Movie.find_by(name: params[:movie_name])
+    #     if @movie
+    #         erb :'movies/show'        
+    #     else
+    #         @message = "Sorry, that movie can not be found."
+    #         redirect '/home'
+    #     end
+    # end
 
 end

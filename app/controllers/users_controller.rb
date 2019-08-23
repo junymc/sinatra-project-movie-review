@@ -34,12 +34,12 @@ class UsersController < ApplicationController
     end
 
     get '/home' do
-      authorize
+      authenticate
       erb :'users/home'
     end
 
     delete '/logout' do
-      authorize
+      authenticate
       session.clear
       redirect '/login'
     end
