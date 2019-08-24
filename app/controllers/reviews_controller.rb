@@ -40,25 +40,24 @@ class ReviewsController < ApplicationController
     patch '/reviews/:id' do
         authenticate
         @review = MovieReview.find_by(id: params[:id])
-        redirect '/access_denied' if @review.user_id != current_user
-        @review.update(rate: params["rate"], content: clean(params["review"]))
-        #Micah's @review.id was 19
-        if !@review.errors.any?
-            redirect '/reviews'
+        if @review.user_id != current_user.id
+            redirect '/access_denied' 
         else
-            erb :'reviews/edit'
+           @review.update(rate: params["rate"], content: clean(params["review"]))
+        # binding.pry
+        #Micah's @review.id was 19
+           if !@review.errors.any?
+               redirect '/reviews'
+           else
+               erb :'reviews/edit'
+           end
         end
     end
-
-    # get '/access_denied'
-    #     @messgae = "You don't have access to this review!"
-    #      erb :'users/home'
-    # end
 
     delete '/reviews/:id' do
         authenticate
         @review = MovieReview.find_by(id: params[:id])
-        redirect '/access_denied' if @review.user_id != current_user
+        redirect '/access_denied' if @review.user_id != current_user.id
         if @review.present?
             @review.destroy
         end

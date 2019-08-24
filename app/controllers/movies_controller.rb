@@ -25,8 +25,7 @@ class MoviesController < ApplicationController
         if @movie
             redirect "/movies/#{@movie.id}"          
         else
-            
-            erb :'users/home'         
+            "Sorry, no results were found."   
         end
     end
 
