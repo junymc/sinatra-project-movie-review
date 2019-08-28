@@ -47,7 +47,8 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/access_denied' do
-        'Sorry, you can not modify this post.'
+       @msg = 'Sorry, you can not modify this post.'
+       erb :error
       end
 
 end

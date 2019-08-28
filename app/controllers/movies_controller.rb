@@ -25,7 +25,8 @@ class MoviesController < ApplicationController
         if @movie
             redirect "/movies/#{@movie.id}"          
         else
-            "Sorry, no results were found."   
+           @msg = "Sorry, no results were found."   
+           erb :error
         end
     end
 
